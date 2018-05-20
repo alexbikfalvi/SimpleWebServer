@@ -1,0 +1,75 @@
+group 'simple-web-server'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'idea'
+apply plugin: 'nebula.ospackage'
+
+sourceCompatibility = 1.8
+
+project.ext {
+    vendor = "Midokura"
+    maintainer = "Midokura <info@midokura.com>"
+    url = "http://midokura.com"
+
+    versions = [
+            commons_io: "2.6",
+            commons_lang: "3.7",
+            config: "1.3.3",
+            finagle: "18.5.0",
+            finatra: "18.5.0",
+            guava: "23.0",
+            jsr305: "3.0.2",
+            junit: "4.12",
+            logback: "1.2.3",
+            scala: "2.12.5",
+            scala_logging: "3.9.0",
+            scala_test: "3.0.5"
+    ]
+
+    libraries = [
+            commons_io: "commons-io:commons-io:${versions.commons_io}",
+            commons_lang: "org.apache.commons:commons-lang3:${versions.commons_lang}",
+            config: "com.typesafe:config:${versions.config}",
+            finagle_core: "com.twitter:finagle-core_2.12:${versions.finagle}",
+            finagle_http: "com.twitter:finagle-http_2.12:${versions.finagle}",
+            finatra_http: "com.twitter:finatra-http_2.12:${versions.finatra}",
+            guava: "com.google.guava:guava:${versions.guava}",
+            logback: "ch.qos.logback:logback-classic:${versions.logback}",
+            jsr305: "com.google.code.findbugs:jsr305:${versions.jsr305}",
+            junit: "junit:junit:${versions.junit}",
+            scala: "org.scala-lang:scala-library:${versions.scala}",
+            scala_logging: "com.typesafe.scala-logging:scala-logging_2.12:${versions.scala_logging}",
+            scala_test: "org.scalatest:scalatest_2.12:${versions.scala_test}"
+    ]
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "com.netflix.nebula:gradle-ospackage-plugin:3.6.1"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile libraries.commons_lang,
+            libraries.config,
+            libraries.finagle_core,
+            libraries.finagle_http,
+            libraries.finatra_http,
+            libraries.guava,
+            libraries.jsr305,
+            libraries.logback,
+            libraries.scala,
+            libraries.scala_logging
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
