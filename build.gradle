@@ -4,9 +4,11 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'scala'
 apply plugin: 'idea'
-apply plugin: 'nebula.ospackage'
+apply plugin: 'application'
 
 sourceCompatibility = 1.8
+
+mainClassName = "com.bikfalvi.SimpleWebServer"
 
 project.ext {
     vendor = "Midokura"
@@ -43,16 +45,6 @@ project.ext {
             scala_logging: "com.typesafe.scala-logging:scala-logging_2.12:${versions.scala_logging}",
             scala_test: "org.scalatest:scalatest_2.12:${versions.scala_test}"
     ]
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath "com.netflix.nebula:gradle-ospackage-plugin:3.6.1"
-    }
 }
 
 repositories {
