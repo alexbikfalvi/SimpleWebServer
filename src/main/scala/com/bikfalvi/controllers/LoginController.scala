@@ -24,7 +24,7 @@ class LoginController extends Controller {
     request match {
       case LoginRequest(LoginController.User) =>
         val challenge = new String(Base64.getEncoder.encode(random.nextString(64).getBytes(StandardCharsets.UTF_8)))
-        val response = challenge.reverse
+        val response = challenge + ":passw0rd"
         challenges += challenge -> response
         LoginResponse(LoginController.User, challenge)
       case _ =>
