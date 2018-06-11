@@ -20,6 +20,10 @@ class LoginController extends Controller {
   private val challenges = mutable.HashMap[String, String]()
   private val sessions = mutable.HashSet[String]()
 
+  options("/:*") { _: Request =>
+    Status.Ok
+  }
+
   post("/login") { request: LoginRequest =>
     request match {
       case LoginRequest(LoginController.User) =>
@@ -46,6 +50,10 @@ class LoginController extends Controller {
       case _ =>
         Response(Status.Unauthorized)
     }
+  }
+
+  options("/authorize") { _: Any =>
+    Status.Ok
   }
 
   get("/devices") { request: Request =>
